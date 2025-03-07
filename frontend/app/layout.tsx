@@ -7,7 +7,8 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "User Management System",
-  description: "A beautiful user management interface",
+  description: "Manage users in your system",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -16,9 +17,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={inter.className}>{children}</body>
     </html>
   )
 }
 
+
+
+import './globals.css'

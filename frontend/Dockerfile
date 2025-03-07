@@ -1,24 +1,23 @@
-# Base image
 FROM node:18-alpine
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy package files
+COPY package.json package-lock.json* ./
 
-# Install ALL dependencies, including dev dependencies needed for CSS processing
+# Install dependencies with legacy-peer-deps flag to bypass dependency conflicts
+RUN npm install --legacy-peer-deps
 
-RUN npm ci
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the files
+# Copy the rest of the application
 COPY . .
 
-# Expose port 3000
+# Expose port for Next.js dev server
 EXPOSE 3000
 
-# Start the application
+# Set environment variables
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Start development server
 CMD ["npm", "run", "dev"]
