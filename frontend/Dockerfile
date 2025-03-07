@@ -7,6 +7,10 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
+# Install ALL dependencies, including dev dependencies needed for CSS processing
+
+RUN npm ci
+
 # Install dependencies
 RUN npm install
 
