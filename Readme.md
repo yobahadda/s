@@ -46,5 +46,8 @@ Clone the project repository to your local machine:
 ```bash
 git clone https://github.com/yobahadda/s.git service
 cd service
-### **2. Set up Docker Swarm**
-later...
+```
+### **2. Set up Docker Compose**
+```bash
+docker-compose up
+```
