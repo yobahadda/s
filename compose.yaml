@@ -24,7 +24,6 @@ services:
       - "5000:5000"
     volumes:
       - ./backend:/app
-      # - /app/node_modules
     environment:
       - FLASK_ENV=development  # Run Flask in development mode
       - REDIS_HOST=redis  

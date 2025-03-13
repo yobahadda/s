@@ -1,0 +1,44 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:19.03.12
+        options: --privileged
+        ports:
+          - 3000:3000
+          - 5000:5000
+          - 6379:6379
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build and push Docker images
+      run: |
+        docker-compose -f compose.yaml build
+        docker-compose -f compose.yaml up -d
+
+    - name: Run tests
+      run: |
+        # Add your test commands here
+        # For example, you can use curl to test endpoints
+        curl --fail http://localhost:3000 || exit 1
+        curl --fail http://localhost:5000 || exit 1
+
+    - name: Shutdown Docker Compose
+      run: docker-compose -f compose.yaml down
