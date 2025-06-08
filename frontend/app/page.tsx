@@ -30,7 +30,7 @@ export default function DashboardPage() {
       const response = await axios.get(`${API_URL}/users`)
       setUsers(response.data)
     } catch (error) {
-      console.error("Error fetching users:", error)
+      console.error("Error fetching users daba:", error)
       toast({
         title: "Error fetching users",
         description: "Please check your connection and try again.",
